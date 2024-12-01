@@ -17,6 +17,7 @@ if __name__ == '__main__':
     parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
     parser.add_argument('--model', type=str, required=True, default='Affine',
                         help='model name, options: [Affine, Linear, STD, TimeFlow]')
+    parser.add_argument('--model_id', type=str, required=True, default='test', help='model id')
 
     # data loader
     parser.add_argument('--data', type=str, required=True, default='ETTh1', help='dataset type')
@@ -53,6 +54,7 @@ if __name__ == '__main__':
     parser.add_argument('--learning_rate', type=float, default=0.001, help='optimizer learning rate')
     parser.add_argument('--lradj', type=str, default='type1', help='adjust learning rate')
     parser.add_argument('--use_amp', action='store_true', help='use automatic mixed precision training', default=False)
+    parser.add_argument('--des', type=str, default='test', help='exp description')
 
     # GPU
     parser.add_argument('--use_gpu', type=bool, default=True, help='use gpu')
@@ -78,14 +80,15 @@ if __name__ == '__main__':
     if args.is_training:
         for ii in range(args.itr):
             # setting record of experiments
-            setting = '{}_{}_ft{}_sl{}_pl{}_dm{}_eb{}_{}'.format(
+            setting = '{}_{}_{}_ft{}_sl{}_pl{}_dm{}_eb{}_{}_{}'.format(args.model_id,
                 args.model,
                 args.data_path[:-4],
                 args.features,
                 args.seq_len,
                 args.pred_len,
                 args.d_model,
-                args.embed, ii)
+                args.embed,
+                args.des, ii)
 
             exp = Exp(args)  # set experiments
             print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
@@ -103,14 +106,15 @@ if __name__ == '__main__':
             torch.cuda.empty_cache()
     else:
         ii = 0
-        setting = '{}_{}_ft{}_sl{}_pl{}_dm{}_eb{}_{}'.format(args.model_id,
+        setting = '{}_{}_{}_ft{}_sl{}_pl{}_dm{}_eb{}_{}_{}'.format(args.model_id,
             args.model,
             args.data_path[:-4],
             args.features,
             args.seq_len,
             args.pred_len,
             args.d_model,
-            args.embed, ii)
+            args.embed,
+            args.des, ii)
 
         exp = Exp(args)  # set experiments
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
