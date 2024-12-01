@@ -1,5 +1,5 @@
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-gpu=0
+gpu=1
 
 if [ ! -d "./logs" ]; then
     mkdir ./logs
@@ -16,9 +16,9 @@ python -u run.py \
   --is_training 1 \
   --model RLinear \
   --root_path ./dataset/ETT-small/ \
-  --data_path ETTm1.csv \
-  --model_id ETTm1'_'$seq_len'_'$pred_len \
-  --data ETTm1 \
+  --data_path ETTm2.csv \
+  --model_id ETTm2'_'$seq_len'_'$pred_len \
+  --data ETTm2 \
   --features M \
   --channel 7 \
   --batch_size 128 \
@@ -34,9 +34,9 @@ python -u run.py \
   --is_training 1 \
   --model RLinear \
   --root_path ./dataset/ETT-small/ \
-  --data_path ETTm1.csv \
-  --model_id ETTm1'_'$seq_len'_'$pred_len \
-  --data ETTm1 \
+  --data_path ETTm2.csv \
+  --model_id ETTm2'_'$seq_len'_'$pred_len \
+  --data ETTm2 \
   --features M \
   --channel 7 \
   --batch_size 128 \

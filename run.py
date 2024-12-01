@@ -11,6 +11,8 @@ torch.manual_seed(fix_seed)
 np.random.seed(fix_seed)
 
 if __name__ == '__main__':
+    print('进入run_longExp.py时的卡数：', torch.cuda.device_count())
+
     parser = argparse.ArgumentParser(description='Multivariate Time Series Forecasting')
 
     # basic config

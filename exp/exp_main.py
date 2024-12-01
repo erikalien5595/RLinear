@@ -184,6 +184,16 @@ class Exp_Main(Exp_Basic):
 
         mse, mae, r_squared = metric(preds, trues)
         print('mse:{:.4f}, mae:{:.4f}, R2:{:.4f}'.format(mse, mae, r_squared))
+        f = open(f"result_{self.args.data_path[:-4]}.txt", 'a')
+        f.write(setting + "  \n")
+        f.write('mse:{}, mae:{}'.format(mse, mae))
+        f.write('\n')
+        f.write('\n')
+        f.close()
+
+        np.save(folder_path + 'metrics.npy', np.array([mae, mse, r_squared]))
+        np.save(folder_path + 'pred.npy', preds)
+        np.save(folder_path + 'true.npy', trues)
 
         return
 
